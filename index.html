@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QQ价值评估</title>
+<meta name="keywords" content="QQ号码价值评估,QQ号码在线估价,QQ号码价值计算,零艺，零艺客" />
+<meta name="description" content="QQ号码价值评估" />
+<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+  <link rel="stylesheet" href="./layui/css/layui.css">
+  <script src="./layui/layui.js"></script>
+  <script src="./js/jquery.min.js"></script>
+  <script type="text/javascript">
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form'], function(){
+      var layer = layui.layer
+              ,form = layui.form;
+    });
+    function price() {
+      var input_qnum = document.querySelector('.qq');
+      var img = document.querySelector(".qq-img img");
+      var qnum = input_qnum.value;
+      if (qnum.length<5){
+        layer.msg('QQ号码的最小长度是5位');
+      }else{
+        if(/^[0-9]+$/.test(qnum)){
+          layer.msg('QQ价值评估完成，长按图片即可保存');
+
+          layer.confirm('将结果分享到QQ空间', {
+            btn: ['分享', '取消'] //可以无限个按钮
+          }, function(index, layero){
+            layer.close(index);
+            share(1,"http://qnum.lwstuio.top","QQ号码价值评估",img.src,"快来看看你的QQ能值多少钱吧");
+          }, function(index){
+          });
+        }else{
+          layer.msg('QQ号码是全数字的哦，请不要输入非数字的字符');
+        }
+      }
+      
+    }
+
+    /**
+     *
+     * @param type 0\qqFriend 1\qzone
+     */
+    function share(type,url,title,img,describe){
+      var link = null;
+      switch (type) {
+        case 0:
+          link = null;
+          break;
+        case 1:
+          var link = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url="+url+"&sharesource=qzone&title="+title+"&pics="+img+"&summary="+describe;
+          break;
+      }
+      window.open(link)
+    }
+
+
+  </script>
+
+</head>
+<body>
+  <h1>QQ价值评估</h1>
+  <div class="qq-box">
+    <div style="text-align: center;" class="qq-ipt">
+      <input type="text" class="qq" value="1314520" placeholder="QQ号"/>
+      <input style="color:white;width: 40%;background: #80a2ff; border-radius: 10px;" type="submit" class="but" value="估价" onclick="price();">
+    </div>
+    
+    <div class="qq-img">
+      <img src="http://c.51240.com/temp/qqjiazhi/131/452/0.jpg?v=2" id="qq-img" alt="QQ:1947504030 - QQ号码价值评估 - QQ号码价值计算 - QQ号码在线估价 - qq价值认证中心 - QQ号码价钱计算">
+      <span class="qq-del"></span>
+    </div>
+				
+    <div class="footer">
+      <p style="text-align: center;">2019 良伟 版权所有 <a style="color:#538cff;" href="http://www.lwstudio.top" target="_blank">良伟工作室</a></p>
+    </div>
+  
+  </div>
+
+</body>
+</html>
